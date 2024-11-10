@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostApiController extends Controller
 {
@@ -38,7 +40,7 @@ class PostApiController extends Controller
             'description' => $request->input('description'),
             'image' => $image,
         ]);
-        $request->file('image')->store('posts');
+        $request->file('image')->store('public/posts');
         return response()->json([
             'message' => 'Post added successfully'
 
@@ -66,7 +68,23 @@ class PostApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::find($id);
+
+        if(!empty($request->file('image'))){
+            Storage::delete('public/posts/' . $post->image);
+            $post->update([
+                'image' => $request->file('image')->hashName()
+            ]);
+            $request->file('image')->store('public/posts');
+        }
+        Post::where('id', $id)->update([
+            'category_id' => $request->input('category_id'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+        ]);
+        return response()->json([
+            'message' => 'Post updated successfully'
+        ], 201);
     }
 
     /**
