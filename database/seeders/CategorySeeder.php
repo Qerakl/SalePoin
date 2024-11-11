@@ -24,7 +24,7 @@ class CategorySeeder extends Seeder
                 'name' => 'Работа'
             ]);
             Category::create([
-                'name' => 'Эксасуары'
+            'name' => 'Эксасуары'
             ]);
         }
     }

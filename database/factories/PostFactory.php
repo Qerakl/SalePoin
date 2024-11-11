@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -22,7 +23,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'rating' => $this->faker->numberBetween(1, 5),
-            'image' => $this->faker->imageUrl(),
+            'image' =>  UploadedFile::fake()->image($this->faker->sentence())->hashName(),
             'purchase_count' => $this->faker->numberBetween(1, 10),
         ];
     }
