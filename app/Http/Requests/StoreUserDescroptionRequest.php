@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOrUpdateAvatarUserRequest extends FormRequest
+class StoreUserDescroptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class StoreOrUpdateAvatarUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'string|max:255|nullable',
         ];
     }
 }

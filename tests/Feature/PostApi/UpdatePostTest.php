@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Feature\UserApi;
+namespace PostApi;
 
 use App\Models\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
