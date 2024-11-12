@@ -5,14 +5,13 @@ namespace Tests\Feature\UserApi;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
-class StoreUserTest extends TestCase
+class StoreImageUserTest extends TestCase
 {
-
-use RefreshDatabase, WithFaker;
-
-    public function testStoreUserDescription(){
+    use RefreshDatabase, WithFaker;
+    public function testStoreImageUser(){
         //Создаем пользователя и проверяем его в бд
         $user = User::factory()->create();
         $this->assertDatabaseHas('users', [
@@ -26,17 +25,17 @@ use RefreshDatabase, WithFaker;
         ]);
         $loginResponse->assertStatus(200);
 
-        //Отправляем запрос для изменения описания профиля и проверяем на статус успеха и что он появился в бд
-        $response = $this->post(route('user.store'), [
-            'description' => 'test'
+        $avatar = UploadedFile::fake()->image('new_avatar.png');
+        $response = $this->post(route('user.avatar'), [
+            'avatar' => $avatar,
         ]);
         $response->assertStatus(201);
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
-            'description' => 'test'
+            'avatar' => $avatar->hashName(),
         ]);
     }
-    public function testStoreUserWithNotDescription(){
+    public function teststoreImageUserWhithNotAvatar(){
         //Создаем пользователя и проверяем его в бд
         $user = User::factory()->create();
         $this->assertDatabaseHas('users', [
@@ -50,14 +49,10 @@ use RefreshDatabase, WithFaker;
         ]);
         $loginResponse->assertStatus(200);
 
-        //Отправляем запрос для изменения описания профиля и проверяем на статус успеха и что он появился в бд
-        $response = $this->post(route('user.store'), [
-            'description' => ''
+        $response = $this->post(route('user.avatar'), [
+            'avatar' => '',
         ]);
-        $response->assertStatus(201);
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'description' => null
-        ]);
+        $response->assertStatus(302);
+
     }
 }

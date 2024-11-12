@@ -33,7 +33,6 @@ class UserApiController extends Controller
     }
     public function storeImage(StoreOrUpdateAvatarUserRequest $request){
         $user = User::findOrFail(auth()->id());
-        if($request->hasFile('avatar')){
             if($user->avatar == 'avatar.png'){
                 $avatar = $request->file('avatar');
                 $request->file('avatar')->store('public/avatars');
@@ -43,24 +42,21 @@ class UserApiController extends Controller
                 ]);
 
                 return response()->json([
-                    'success' => true,
+                    'message' => 'успех',
                 ], 201);
             }
 
             $avatar = $request->file('avatar');
             $request->file('avatar')->store('public/avatars');
-            Storage::delete($user->avatar);
+            Storage::delete('public/avatars/' . $user->image);
             User::where('id', auth()->id())->update([
                 'avatar' => $avatar->hashName(),
             ]);
 
             return response()->json([
-                'success' => true,
+                'message' => 'успех',
             ], 201);
-        }
-        return response()->json([
-            'success' => false,
-        ], 204);
+
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,18 +10,15 @@ class StoreOrUpdateAvatarUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; // Здесь вы можете добавить проверку на авторизацию, если необходимо
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Укажите правила валидации для изображения
         ];
     }
 }
+
+
