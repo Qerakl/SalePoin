@@ -84,9 +84,15 @@ class PostApiController extends Controller
      */
     public function destroy(string $id)
     {
-        Post::where('id', $id)->where('user_id', auth()->id())->delete();
+        if(Post::where('id', $id)->where('user_id', auth()->id())->exists()) {
+            Post::where('id', $id)->where('user_id', auth()->id())->delete();
+            return response()->json([
+                'message' => 'Post deleted successfully'
+            ], 200);
+        }
         return response()->json([
-            'message' => 'Post deleted successfully'
-        ], 200);
+            'message' => 'Post not found'
+        ], 404);
+
     }
 }
