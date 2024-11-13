@@ -56,14 +56,6 @@ class PostApiController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdatePostRequest $request, string $id)
@@ -92,6 +84,6 @@ class PostApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Post::where('id', $id)->where('user_id', auth()->id())->delete();
     }
 }
