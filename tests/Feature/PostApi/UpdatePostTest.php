@@ -30,6 +30,7 @@ class UpdatePostTest extends TestCase
             'description' => 'test description',
             'image' => $file->hashName(),
         ]);
+        Storage::delete('public/posts/' . $file->hashName());
 
     }
 

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class StoreImageUserTest extends TestCase
@@ -34,6 +35,7 @@ class StoreImageUserTest extends TestCase
             'id' => $user->id,
             'avatar' => $avatar->hashName(),
         ]);
+        Storage::delete('public/avatars/' . $avatar->hashName());
     }
     public function teststoreImageUserWhithNotAvatar(){
         //Создаем пользователя и проверяем его в бд

@@ -76,4 +76,5 @@ class DestroyPostTest extends TestCase
         ]);
     }
 
+
 }
