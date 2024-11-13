@@ -3,18 +3,19 @@
 namespace PostApi;
 
 use App\Models\Post;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UpdatePostTest extends TestCase
 {
-
+    use RefreshDatabase;
     public function test_update_post(): void{
-        Post::factory()->create();
+        $post = Post::factory()->create();
         $file = UploadedFile::fake()->image('new_image.png');
 
-        $response = $this->put(route('post.update', 12), [
+        $response = $this->put(route('post.update', $post->id), [
             'category_id' => 2,
             'title' => 'test',
             'description' => 'test description',

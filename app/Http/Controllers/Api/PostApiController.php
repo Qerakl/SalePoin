@@ -34,7 +34,7 @@ class PostApiController extends Controller
     {
         $image = $request->file('image')->hashName();
         Post::create([
-            'user_id' => 1, //$request->user()->id
+            'user_id' => auth()->id(),
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
             'description' => $request->input('description'),
@@ -85,5 +85,8 @@ class PostApiController extends Controller
     public function destroy(string $id)
     {
         Post::where('id', $id)->where('user_id', auth()->id())->delete();
+        return response()->json([
+            'message' => 'Post deleted successfully'
+        ], 200);
     }
 }
