@@ -80,6 +80,14 @@ class UserApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if(auth()->id() == $id){
+            User::destroy($id);
+            return response()->json([
+                'message' => 'deleted successfully',
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'not found'
+        ], 404);
     }
 }
