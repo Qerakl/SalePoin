@@ -40,6 +40,7 @@ class AuthApiController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
         ]);
+        unset($user['password']);
         if (! $token = auth()->attempt($request->only('email', 'password'))) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
