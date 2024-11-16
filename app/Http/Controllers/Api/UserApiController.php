@@ -64,8 +64,12 @@ class UserApiController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::find($id);
-        return response()->json([$user]);
+        if(!empty($user = User::find($id))){
+            return response()->json([$user]);
+        }
+        return response()->json([
+            'message' => 'not found'
+        ], 404);
     }
 
     /**
