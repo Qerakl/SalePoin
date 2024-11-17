@@ -65,6 +65,7 @@ class UserApiController extends Controller
     public function show(string $id)
     {
         if(!empty($user = User::find($id))){
+            unset($user['password']);
             return response()->json([$user]);
         }
         return response()->json([
