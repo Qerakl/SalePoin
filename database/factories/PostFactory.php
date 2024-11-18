@@ -24,6 +24,7 @@ class PostFactory extends Factory
             'description' => $this->faker->paragraph(),
             'rating' => $this->faker->numberBetween(1, 5),
             'image' =>  UploadedFile::fake()->image($this->faker->sentence())->hashName(),
+            'price' => $this->faker->numberBetween(100, 3000),
             'purchase_count' => $this->faker->numberBetween(1, 10),
         ];
     }
