@@ -25,6 +25,7 @@ class UpdatePostRequest extends FormRequest
             'category_id' => 'required',
             'title' => 'required|max:100|string',
             'description' => 'required|max:400|string',
+            'price' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
