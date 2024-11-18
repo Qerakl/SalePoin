@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrUpdateAvatarUserRequest;
 use App\Http\Requests\StoreUserDescroptionRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -75,9 +76,20 @@ class UserApiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        if($id === auth()->id()){
+            User::where('id', auth()->id())->update([
+                'name' => $request->input("name"),
+                'email' => $request->input("email"),
+            ]);
+            return response()->json([
+                'message' => 'updated successfully'
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'not found'
+        ], 404);
     }
 
     /**
