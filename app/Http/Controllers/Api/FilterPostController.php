@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class FilterPostController extends Controller
 {
-    public function filterPost(Request $request){
+    public function filter(Request $request){
         $posts = Post::where('category_id', $request->input('category_id'))
             ->where('rating', '>', $request->input('rating_from'))
             ->where('rating', '<', $request->input('rating_to'))
