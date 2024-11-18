@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('rating', 2, 1)->nullable();
             $table->string('image');
+            $table->bigInteger('price')->default(0);
             $table->integer('purchase_count')->default(0);
             $table->timestamps();
         });
