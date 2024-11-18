@@ -20,6 +20,7 @@ class UpdatePostTest extends TestCase
             'title' => 'test',
             'description' => 'test description',
             'image' => $file,
+            'price' => 2122
         ]);
 
         $response->assertStatus(201);
@@ -29,6 +30,7 @@ class UpdatePostTest extends TestCase
             'title' => 'test',
             'description' => 'test description',
             'image' => $file->hashName(),
+            'price' => 2122
         ]);
         Storage::delete('public/posts/' . $file->hashName());
 
@@ -39,6 +41,7 @@ class UpdatePostTest extends TestCase
             'category_id' => 2,
             'title' => 'test',
             'description' => 'test description',
+            'price' => 2122
         ]);
 
         $response->assertStatus(201);
@@ -46,6 +49,7 @@ class UpdatePostTest extends TestCase
             'category_id' => 2,
             'title' => 'test1',
             'description' => 'test description1',
+            'price' => 2122
         ]);
     }
 }
