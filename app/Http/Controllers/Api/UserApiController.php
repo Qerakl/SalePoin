@@ -17,7 +17,11 @@ class UserApiController extends Controller
      */
     public function index()
     {
-
+        $user = User::all();
+        return response()->json([
+            $user,
+            'message' => "It`s all users"
+        ], 200);
     }
 
     /**
