@@ -16,6 +16,7 @@ class Post extends Model
         'description',
         'rating',
         'image',
+        'price',
         'purchase_count',
     ];
 }
