@@ -26,6 +26,8 @@ class PostFactory extends Factory
             'image' =>  UploadedFile::fake()->image($this->faker->sentence())->hashName(),
             'price' => $this->faker->numberBetween(100, 3000),
             'purchase_count' => $this->faker->numberBetween(1, 10),
+            'created_at' => $this->faker->dateTime(),
+            'updated_at' => $this->faker->dateTime(),
         ];
     }
 }
