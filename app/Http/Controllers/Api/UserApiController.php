@@ -78,7 +78,7 @@ class UserApiController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        if($id === auth()->id()){
+        if($id == auth()->id()){
             User::where('id', auth()->id())->update([
                 'name' => $request->input("name"),
                 'email' => $request->input("email"),
