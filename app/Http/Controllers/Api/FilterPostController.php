@@ -17,6 +17,9 @@ class FilterPostController extends Controller
             ->where('created_at', '>', $request->input('date_from'))
             ->where('created_at', '<', $request->input('date_to'))
             ->get();
-        return response()->json($posts);
+        return response()->json([
+            $posts,
+            'message' => 'Filtered Posts',
+        ], 200);
     }
 }
