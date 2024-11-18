@@ -39,6 +39,7 @@ class PostApiController extends Controller
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
             'description' => $request->input('description'),
+            'price' => $request->input('price'),
             'image' => $image,
         ]);
         $request->file('image')->store('public/posts');
@@ -83,6 +84,7 @@ class PostApiController extends Controller
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
             'description' => $request->input('description'),
+            'price' => $request->input('price'),
         ]);
         return response()->json([
             'message' => 'Post updated successfully'
