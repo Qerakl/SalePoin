@@ -25,3 +25,4 @@ Route::post('auth/register', [AuthApiController::class, 'register'])->name('auth
 Route::resource('post', PostApiController::class);
 Route::resource('user', UserApiController::class);
 Route::post('user/avatar', [UserApiController::class, 'storeImage'])->name('user.avatar');
+Route::post('post/filter', [\App\Http\Controllers\Api\FilterPostController::class, 'filter'])->name('post.filter');
