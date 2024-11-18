@@ -56,7 +56,6 @@ class UserApiController extends Controller
             return response()->json([
                 'message' => 'успех',
             ], 201);
-
     }
 
     /**

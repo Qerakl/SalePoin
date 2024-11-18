@@ -53,7 +53,16 @@ class PostApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::find($id);
+        if(!empty($post)){
+            return response()->json([
+                'post' => $post,
+                'message' => 'Post retrieved successfully'
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'Post not found'
+        ], 404);
     }
 
     /**
