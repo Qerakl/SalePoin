@@ -10,13 +10,13 @@ class StoreOrUpdateAvatarUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; // Здесь вы можете добавить проверку на авторизацию, если необходимо
+        return auth()->check();
     }
 
     public function rules(): array
     {
         return [
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Укажите правила валидации для изображения
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
