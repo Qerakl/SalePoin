@@ -21,7 +21,7 @@ class PostApiController extends Controller
             return Post::all();
         });
 
-        return response()->json($posts->user());
+        return response()->json($posts);
     }
 
     /**
