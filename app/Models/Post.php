@@ -19,4 +19,11 @@ class Post extends Model
         'price',
         'purchase_count',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function category(){
+        return $this->HasOne(Category::class);
+    }
 }
