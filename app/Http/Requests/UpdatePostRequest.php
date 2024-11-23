@@ -11,7 +11,10 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if(auth()->check() && auth()->id() === (int) $this->request->get('id')) {
+            return true;
+        }
+        return false;
     }
 
     /**

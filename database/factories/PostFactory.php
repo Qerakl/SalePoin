@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 
@@ -18,7 +19,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 10),
+            'user_id' => User::factory()->create(),
             'category_id' => $this->faker->numberBetween(1, 4),
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),

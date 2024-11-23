@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class PostApiController extends Controller
@@ -16,7 +17,10 @@ class PostApiController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Cache::remember('posts', now()->addMinutes(10), function () {
+            return Post::all();
+        });
+
         return response()->json($posts);
     }
 
