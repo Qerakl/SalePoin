@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Order;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Order;
 
-class OrderController extends Controller
+class OrderApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,20 +17,19 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        Order::create([
+            'user_id' => auth()->id(),
+            'post_id' => $request->id,
+        ]);
+        return response()->json([
+            'message' => 'Order created successfully'
+        ]);
     }
 
     /**
@@ -37,7 +37,12 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        if($order->user()->id === auth()->id()){
+            return response()->json([$order]);
+        }
+        return response()->json([
+            'message' => 'Order not found'
+        ], 403);
     }
 
     /**
@@ -53,7 +58,7 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+
     }
 
     /**
